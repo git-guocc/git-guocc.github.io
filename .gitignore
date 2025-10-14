@@ -12,6 +12,9 @@ public/
 # Hugo resources (processed assets)
 resources/
 
+# Hugo module vendor (do not commit unless offline builds are required)
+_vendor/
+
 # Hugo build lock
 .hugo_build.lock
 

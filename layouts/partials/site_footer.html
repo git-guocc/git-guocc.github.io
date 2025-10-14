@@ -1,0 +1,94 @@
+<footer class="site-footer">
+  {{- if site.Params.footer.copyright.notice -}}
+  <p class="powered-by">
+    {{ replace (replace (replace site.Params.footer.copyright.notice "{year}" now.Year) "{license}" site.Params.footer.copyright.license.name) "{current_year}" now.Year | markdownify | emojify }}
+  </p>
+  {{- end -}}
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var head = document.head || document.getElementsByTagName('head')[0];
+      var avatar = '/authors/admin/avatar.jpg';
+
+      function setIcon(rel, sizes, type) {
+        var selector = 'link[rel="' + rel + '"]' + (sizes ? '[sizes="' + sizes + '"]' : ':not([sizes])');
+        var link = head.querySelector(selector);
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = rel;
+          if (sizes) link.sizes = sizes;
+          head.appendChild(link);
+        }
+        link.href = avatar;
+        if (type) link.type = type;
+      }
+
+      // Standard favicons
+      setIcon('icon', null, 'image/jpeg');
+      setIcon('icon', '32x32', 'image/jpeg');
+      setIcon('icon', '16x16', 'image/jpeg');
+
+      // Apple touch icon
+      var apple = head.querySelector('link[rel="apple-touch-icon"]');
+      if (!apple) {
+        apple = document.createElement('link');
+        apple.rel = 'apple-touch-icon';
+        head.appendChild(apple);
+      }
+      apple.href = avatar;
+    } catch (e) { /* no-op */ }
+  });
+  </script>
+
+<style>
+  /* Disable CSS-based pseudo tooltips to avoid clipping; JS tooltip will be used */
+  .tag-hint::after { display: none !important; }
+  .hb-tooltip { position: fixed; z-index: 9999; background: #111; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; pointer-events: none; white-space: nowrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+</style>
+
+<script>
+  // Global tooltip for .tag-hint that escapes card overflow
+  document.addEventListener('DOMContentLoaded', function () {
+    function showTooltip(el) {
+      var text = el.getAttribute('data-tooltip');
+      if (!text) return;
+      var tip = document.createElement('div');
+      tip.className = 'hb-tooltip';
+      tip.textContent = text;
+      document.body.appendChild(tip);
+      var rect = el.getBoundingClientRect();
+      var pad = 8;
+      // Default position: below the tag
+      var top = rect.bottom + pad;
+      var left = rect.left + rect.width / 2 - tip.offsetWidth / 2;
+      // Clamp to viewport
+      left = Math.max(8, Math.min(left, window.innerWidth - tip.offsetWidth - 8));
+      // If bottom overflows, place above
+      if (top + tip.offsetHeight > window.innerHeight - 8) {
+        top = rect.top - tip.offsetHeight - pad;
+      }
+      tip.style.top = top + 'px';
+      tip.style.left = left + 'px';
+      el._hbTooltip = tip;
+    }
+    function hideTooltip(el) {
+      if (el && el._hbTooltip) { el._hbTooltip.remove(); el._hbTooltip = null; }
+    }
+    document.addEventListener('mouseenter', function (e) {
+      var t = e.target.closest('.tag-hint');
+      if (!t) return;
+      showTooltip(t);
+    }, true);
+    document.addEventListener('mouseleave', function (e) {
+      var t = e.target.closest('.tag-hint');
+      if (!t) return;
+      hideTooltip(t);
+    }, true);
+    window.addEventListener('scroll', function () {
+      document.querySelectorAll('.tag-hint').forEach(function (el) { hideTooltip(el); });
+    }, { passive: true });
+  });
+</script>
+

@@ -28,6 +28,40 @@ cascade:
     header:
       navbar:
         enable: true
+  # Publication options
+  - _target:
+      path: /publication/**
+      kind: page
+    pager: false
+    editable: false
+    hide_date: true
+    reading_time: false
+    commentable: false
+    show_related: false
+    share: false
+    show_authors: false
+    show_date_updated: false
+    show_breadcrumb: false
+    header:
+      navbar:
+        enable: true
+  # Preprint options (match publication look & feel)
+  - _target:
+      path: /preprint/**
+      kind: page
+    pager: false
+    editable: false
+    hide_date: true
+    reading_time: false
+    commentable: false
+    show_related: false
+    share: false
+    show_authors: false
+    show_date_updated: false
+    show_breadcrumb: false
+    header:
+      navbar:
+        enable: true
 
 ############################
 ## LANGUAGE
@@ -54,18 +88,22 @@ footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
 disableAliases: true
 outputs:
-  home: [HTML, RSS, headers, redirects, backlinks]
-  section: [HTML, RSS]
+  home: [HTML, headers, redirects, backlinks]
+  section: []
 imaging:
   resampleFilter: lanczos
   quality: 90
   anchor: smart
   hint: picture
 timeout: 600000
-taxonomies:
-  tag: tags
-  category: categories
-  author: authors
+taxonomies: {}
+disableKinds:
+  - section
+  - taxonomy
+  - term
+  - RSS
+  - sitemap
+  - robotsTXT
 markup:
   _merge: deep
 related:

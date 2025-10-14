@@ -16,12 +16,42 @@ sections:
       avatar:
         size: medium  # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
         shape: circle # Options: circle (default), square, rounded
-  - block: collection
+  - block: markdown
+    id: working
     content:
+      title: Working
+      text: |
+        I am currently exploring the field of 3D reconstruction and actively experimenting with related approaches.
+    design:
+      columns: 1
+      spacing:
+        padding: ['3rem', 0, '3rem', 0]
+  - block: collection
+    id: preprints
+    content:
+      title: Preprints
+      text: ""
       filters:
         folders:
-          - blog
+          - preprint
+        exclude_featured: false
     design:
+      view: card
+      columns: 1
       spacing:
-        padding: ['3rem', 0, '6rem', 0]
+        padding: ['3rem', 0, '1rem', 0]
+  - block: collection
+    id: publications
+    content:
+      title: Publications
+      text: ""
+      filters:
+        folders:
+          - publication
+        exclude_featured: false
+    design:
+      view: card
+      columns: 1
+      spacing:
+        padding: ['3rem', 0, '3rem', 0]
 ---
