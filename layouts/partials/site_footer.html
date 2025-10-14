@@ -10,9 +10,16 @@
   document.addEventListener('DOMContentLoaded', function () {
     try {
       var head = document.head || document.getElementsByTagName('head')[0];
-      var avatar = '/authors/admin/avatar.jpg';
+      // Bust favicon cache via version query
+      var avatar = '/authors/admin/avatar.jpg?v=2';
 
-      function setIcon(rel, sizes, type) {
+      // Update all existing icon links
+      Array.prototype.forEach.call(head.querySelectorAll('link[rel*="icon"]'), function (lnk) {
+        lnk.href = avatar;
+        lnk.type = 'image/jpeg';
+      });
+
+      function ensureIcon(rel, sizes) {
         var selector = 'link[rel="' + rel + '"]' + (sizes ? '[sizes="' + sizes + '"]' : ':not([sizes])');
         var link = head.querySelector(selector);
         if (!link) {
@@ -22,13 +29,14 @@
           head.appendChild(link);
         }
         link.href = avatar;
-        if (type) link.type = type;
+        link.type = 'image/jpeg';
       }
 
       // Standard favicons
-      setIcon('icon', null, 'image/jpeg');
-      setIcon('icon', '32x32', 'image/jpeg');
-      setIcon('icon', '16x16', 'image/jpeg');
+      ensureIcon('icon');
+      ensureIcon('icon', '32x32');
+      ensureIcon('icon', '16x16');
+      ensureIcon('shortcut icon');
 
       // Apple touch icon
       var apple = head.querySelector('link[rel="apple-touch-icon"]');
