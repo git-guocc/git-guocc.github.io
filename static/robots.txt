@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Point crawlers to the Hugo-generated sitemap
+Sitemap: https://git-guocc.github.io/sitemap.xml
+
+

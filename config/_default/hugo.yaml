@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: "Creator's Blog (Hugo Theme)" # Website name
-baseURL: 'https://example.com/' # Website URL
+baseURL: 'https://git-guocc.github.io/' # Website URL
 
 ############################
 ## PAGE OPTIONS
@@ -68,7 +68,7 @@ cascade:
 ############################
 
 defaultContentLanguage: en
-hasCJKLanguage: false
+hasCJKLanguage: true
 defaultContentLanguageInSubdir: false
 removePathAccents: true
 
@@ -102,8 +102,7 @@ disableKinds:
   - taxonomy
   - term
   - RSS
-  - sitemap
-  - robotsTXT
+  # Keep sitemap & robots enabled for SEO
 markup:
   _merge: deep
 related:
@@ -118,6 +117,8 @@ related:
 security:
   _merge: deep
 sitemap:
-  _merge: deep
+  changefreq: weekly
+  priority: 0.5
+  filename: sitemap.xml
 minify:
   _merge: deep

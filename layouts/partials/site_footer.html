@@ -92,3 +92,46 @@
   });
 </script>
 
+{{/* Basic JSON-LD to help search engines understand site & pages */}}
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Chuchen Guo",
+  "url": "https://git-guocc.github.io/",
+  "image": "https://git-guocc.github.io/authors/admin/avatar.jpg"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://git-guocc.github.io/",
+  "name": "Chuchen Guo"
+}
+</script>
+{{- end -}}
+
+{{- if or (eq .Type "publication") (eq .Section "publication") (eq .Section "preprint") -}}
+{{- $t := .Title | plainify -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": {{ $t | jsonify }},
+  "name": {{ $t | jsonify }},
+  "author": [
+    {{- $first := true -}}
+    {{- range .Params.authors -}}
+      {{- if not $first }},{{ end -}}
+      { "@type": "Person", "name": {{ . | jsonify }} }
+      {{- $first = false -}}
+    {{- end -}}
+  ],
+  "datePublished": {{ (or .Date .Lastmod) | time.Format "2006-01-02" | jsonify }},
+  "url": {{ .Permalink | jsonify }}
+}
+</script>
+{{- end -}}
+
