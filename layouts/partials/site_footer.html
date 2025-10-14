@@ -6,49 +6,7 @@
   {{- end -}}
 </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    try {
-      var head = document.head || document.getElementsByTagName('head')[0];
-      // Bust favicon cache via version query
-      var avatar = '/authors/admin/avatar.jpg?v=2';
-
-      // Update all existing icon links
-      Array.prototype.forEach.call(head.querySelectorAll('link[rel*="icon"]'), function (lnk) {
-        lnk.href = avatar;
-        lnk.type = 'image/jpeg';
-      });
-
-      function ensureIcon(rel, sizes) {
-        var selector = 'link[rel="' + rel + '"]' + (sizes ? '[sizes="' + sizes + '"]' : ':not([sizes])');
-        var link = head.querySelector(selector);
-        if (!link) {
-          link = document.createElement('link');
-          link.rel = rel;
-          if (sizes) link.sizes = sizes;
-          head.appendChild(link);
-        }
-        link.href = avatar;
-        link.type = 'image/jpeg';
-      }
-
-      // Standard favicons
-      ensureIcon('icon');
-      ensureIcon('icon', '32x32');
-      ensureIcon('icon', '16x16');
-      ensureIcon('shortcut icon');
-
-      // Apple touch icon
-      var apple = head.querySelector('link[rel="apple-touch-icon"]');
-      if (!apple) {
-        apple = document.createElement('link');
-        apple.rel = 'apple-touch-icon';
-        head.appendChild(apple);
-      }
-      apple.href = avatar;
-    } catch (e) { /* no-op */ }
-  });
-  </script>
+<!-- Favicon handled statically via /favicon.ico. No JS override needed. -->
 
 <style>
   /* Disable CSS-based pseudo tooltips to avoid clipping; JS tooltip will be used */
