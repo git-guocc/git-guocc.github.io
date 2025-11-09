@@ -15,6 +15,42 @@
 </style>
 
 <script>
+  // Ensure favicon uses the project's /favicon.ico (avatar) instead of theme default.
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var head = document.head || document.getElementsByTagName('head')[0];
+      var iconHref = '/favicon.ico?v=3'; // cache-bust
+
+      function ensureIcon(rel, sizes, type) {
+        var selector = 'link[rel=\"' + rel + '\"]' + (sizes ? '[sizes=\"' + sizes + '\"]' : ':not([sizes])');
+        var link = head.querySelector(selector);
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = rel;
+          if (sizes) link.sizes = sizes;
+          head.appendChild(link);
+        }
+        link.href = iconHref;
+        if (type) link.type = type;
+      }
+
+      // Update any existing icon links
+      head.querySelectorAll('link[rel*=\"icon\"]').forEach(function (lnk) {
+        lnk.href = iconHref;
+        if (!lnk.type) lnk.type = 'image/x-icon';
+      });
+
+      // Standard favicons and shortcut
+      ensureIcon('icon', null, 'image/x-icon');
+      ensureIcon('shortcut icon', null, 'image/x-icon');
+
+      // Apple touch icon fallback
+      ensureIcon('apple-touch-icon', null, 'image/png');
+    } catch (e) { /* no-op */ }
+  });
+</script>
+
+<script>
   // Global tooltip for .tag-hint that escapes card overflow
   document.addEventListener('DOMContentLoaded', function () {
     function showTooltip(el) {
