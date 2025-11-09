@@ -2,8 +2,9 @@
 title: "Guiding Point Cloud Denoising with Learned Structural Priors"
 authors:
   - "Chuchen Guo"
-date: "2025-04-11"
-publication_short: "Preprint"
+date: "2026-01-01"
+publication: "In *The 40th Annual AAAI Conference on Artificial Intelligence (AAAI 2026)*"
+publication_short: "AAAI 2026"
 
 tags:
   - AAAI 2026
