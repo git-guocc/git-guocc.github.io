@@ -1,11 +1,8 @@
 ---
-
-<div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-  guocc Chuchen Guo Guo Chuchen 郭楚臣 ASDN PGD
-</div>
 title: 'Home'
 date: 2023-10-24
 type: landing
+keywords: "guocc, Chuchen Guo, Guo Chuchen, 郭楚臣, ASDN, PGD, PointInDI"
 sections:
   - block: resume-biography
     content:
@@ -59,3 +56,7 @@ sections:
       spacing:
         padding: ['3rem', 0, '3rem', 0]
 ---
+
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+  guocc Chuchen Guo Guo Chuchen 郭楚臣 ASDN PGD
+</div>
